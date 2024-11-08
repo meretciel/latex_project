@@ -1,0 +1,99 @@
+\documentclass[letterpaper, oneside]{book}
+%\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{amsmath}
+%\usepackage{listings}
+%\usepackage{graphicx}
+%\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{fancyhdr}
+\usepackage[export]{adjustbox}
+\usepackage[skip=10pt]{parskip}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+\pagestyle{plain}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[chapter]
+
+\begin{document}
+
+\chapter{Quadratic Programming}
+
+In this chapter, we will present a brief introduction to Quadratic Programming.
+
+Quadratic programming is a set of methods that solves a class of optimization problem with quadratic form. More specifically, we want to minimize the following objective function
+
+\begin{displaymath}
+	c^{\mathsf{T}}x + \frac{1}{2}x^{\mathsf{T}} \Sigma x
+\end{displaymath}
+
+subject to the following constraints:
+
+\begin{displaymath}
+	a_i^{\mathsf{T}}x, \leq b_i\;\;i=1,2,...,m
+\end{displaymath}
+
+In the above expression, $x \in \mathbb{R}^n$ is the variable, $c \in \mathbb{R}^n$ is a constant vector, and $\Sigma \in \mathbb{R}^{n\times n}$ is a constant matrix. The optimization problem has $m$ constraints and for all $i$, $a_i \in \mathbb{R}^n$ and $b_i \in \mathbb{R}$.
+
+The constraints can be expressed in a more compact way:
+
+\begin{displaymath}
+	Ax \leq b
+\end{displaymath}
+where 
+
+\begin{align*}
+	A^{\mathsf{T}} & = [a_1 \, a_2 \, ... \, a_m] \;\; \textrm{and} \\
+	b^{\mathsf{T}} & = [b_1 \, b_2 \, ... \, b_m]
+\end{align*}
+
+Note here $A$ is a matrix in $\mathbb{R}^{m \times n}$ and $b$ is a vector in $\mathbb{R}^n$.
+
+An constraint $i$ is active if $a_i^{\mathsf{T}}x = b_i$. A related concept, active constraints indices, is defined as follows:
+
+\begin{displaymath}
+	I(x_0) = \{i | a_i^{\mathsf{T}}x_0=b_i\}
+\end{displaymath}
+
+Note that the size of $I(x_0)$ is bounded by the number of constraints. In other words,
+
+\begin{displaymath}
+	|I(x_0)| \leq m
+\end{displaymath}
+
+One of the key concepts in quadratic programming is quasi-stationary point, which is defined as follows:
+
+\begin{definition}[Quasi-Stationary Point]
+	The point $x_0$ is quasi-stationary if $x_0\in R$, and $x_0$ is optimal for the problem
+	\begin{displaymath}
+		\textrm{min}\{c^{\mathsf{T}}x + \frac{1}{2}x^{\mathsf{T}}\Sigma{}x \;|\; a_i^{\mathsf{T}}x=b_i, \;\forall i \in I(x_0)  \}
+	\end{displaymath}
+\end{definition}
+
+The point $x_0$ is a nondegenerate quasi-stationary point if it's a quasi-stationary point and the gradients of those constraints active at $x_0$ are linearly independent. The point $x_0$ is a degenerate quasi-stationary point if it's a quasi-stationary point and the gradients of those constraints active at $x_0$ are linear dependent.
+
+\begin{remark}
+	An extreme point (in the context of linear programming) is a special case of quasi-stationary point. Recall that the $x_0$ is an extreme point if $x_0 \in R$ and there are $n$ constraints having linearly independent gradients active at $x_0$. This reduces $I(x_0)$ to a single point, which is also the optimal point.
+\end{remark}
+
+\begin{prop}
+	There are at most $2^m$ quasi-stationary points.
+\end{prop}
+
+\begin{theorem}
+	There are at most $2^m$ quasi-stationary points.
+\end{theorem}
+
+\end{document}
