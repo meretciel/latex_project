@@ -1,0 +1,32 @@
+
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\bb}[1]{\mathbb{#1}}
+\newcommand{\plusbinomial}[3][2]{(#2 + #3)^#1}
+
+\newenvironment{xboxed}[2][This is a box]
+{\begin{center}
+		Argument 1 (\#1)=#1\\[1ex]
+		\begin{tabular}{{{!}}p{0.9\textwidth}{{!}}}
+			\hline\\
+			Argument 2 (\#2)=#2\\[2ex]
+		}
+		{ 
+			\\\\\hline
+		\end{tabular} 
+	\end{center}
+}
+
+\chapter[Command and Environment]{Command and \rlap{Environment}}
+
+The set of real numbers are usually represented 
+by a blackboard bold capital R: \( \R \).
+
+Other numerical systems have similar notations. 
+The complex numbers \( \bb{C} \), the rational 
+numbers \( \bb{Q} \) and the integer numbers \( \bb{Z} \).
+
+We can use it like this: \[ \plusbinomial{x}{y} \]
+
+And even the exponent can be changed:
+
+\[ \plusbinomial[4]{a}{b} \]

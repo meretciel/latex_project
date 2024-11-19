@@ -1,0 +1,96 @@
+\chapter{Robotics}
+
+
+\begin{algorithm}
+    \renewcommand{\thealgorithm}{} % this line is used to remove the algorithm number.
+    \caption{\textbf{Bayes Filter}}\label{alg:cap}
+
+    \begin{algorithmic}[1]
+        \Function{BayesFilter}{$bel(x_{t-1}), u_t, z_t$}
+        \ForAll{$x_t$}
+        \State $\overline{bel}(x_t) = \int{p(x_t|u_t, x_{t-1})bel(x_{t-1})dx_{t-1}}$
+        \State $bel(x_t) = \eta{}p(z_t|x_t)\overline{bel}(x_t)$
+        \EndFor
+        \State \textbf{return} $bel(x_t)$
+        \EndFunction
+
+    \end{algorithmic}
+
+\end{algorithm}
+
+\newpage
+\begin{algorithm}
+    \renewcommand{\thealgorithm}{}
+    \begin{algorithmic}[1]
+    \Function{Kalman\_Filter}{$\mu_{t-1}, \Sigma_{t-1}, u_t, z_t$}
+    \State $\bar{\mu}_t = A_t \mu_{t-1} + B_t u_t$
+    \State $\bar{\Sigma}_t = A_t\Sigma_{t-1}A_t^T + R_t$
+
+    \State $K_t = \bar{\Sigma}_t C_t^T (C_t \bar{\Sigma}_t  C_t^T + Q_t)^{-1}$  \Comment{This is called Kalman gain}
+
+    \State $\mu_t = \bar{\mu}_t + K_t(z_t - C_t \bar{\mu}_t)$
+
+    \State $\Sigma_t = (I - K_tC_t) \bar{\Sigma}_t$
+
+    \State $\textbf{return} \;\; \mu_t, \Sigma_t$
+    \EndFunction
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\begin{align*}
+x_t & = g(u_t, x_{t-1}) + \epsilon_t \\
+z_t & = h(x_t) + \delta_t
+\end{align*}
+
+\[
+g(u_t, x_{t-1}) \approx g(u_t, \mu_{t-1}) + \frac{}{}(u_t, \mu_{t-1})(x_{t-1} - \mu_{t-1})
+\]
+
+\begin{equation}
+    \begin{split}
+    g(u_t, x_{t-1}) & \approx g(u_t, \mu_{t-1}) + \frac{\partial g}{\partial x_{t-1}}(u_t, \mu_{t-1})(x_{t-1} - \mu_{t-1}) \\
+                    & = g(u_t, \mu_{t-1}) + G_t(x_{t-1} - \mu_{t-1})
+    \end{split}
+\end{equation}
+
+
+
+\begin{align*}
+    g(u_t, x_{t-1}) & \approx g(u_t, \mu_{t-1}) + \frac{\partial g}{\partial x_{t-1}}(u_t, \mu_{t-1})(x_{t-1} - \mu_{t-1}) \\
+    & = g(u_t, \mu_{t-1}) + G_t(x_{t-1} - \mu_{t-1})
+\end{align*}
+
+\[
+h(x_t) \approx h(\bar{\mu}_t) + H_t(x_t - \bar{\mu}_t)
+\]
+
+
+%\bar{\mu}_t = g(u_t, \mu_{t-1})
+
+
+
+\begin{algorithm}
+    \renewcommand{\thealgorithm}{}
+    \begin{algorithmic}[1]
+        \Function{EKF}{$\mu_{t-1}, \Sigma_{t-1}, u_t, z_t$}
+        \State $\bar{\mu}_t = g(u_t, \mu_{t-1})$
+        \State $\bar{\Sigma}_t = G_t\Sigma_{t-1}G_t^T + R_t$
+
+        \State $K_t = \bar{\Sigma}_t H_t^T (H_t \bar{\Sigma}_t  H_t^T + Q_t)^{-1}$
+
+        \State $\mu_t = \bar{\mu}_t + K_t(z_t - h(\bar{\mu}_t))$
+
+        \State $\Sigma_t = (I - K_tH_t) \bar{\Sigma}_t$
+
+        \State $\textbf{return} \;\; \mu_t, \Sigma_t$
+        \EndFunction
+
+    \end{algorithmic}
+\end{algorithm}
+
+
+
+

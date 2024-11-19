@@ -1,0 +1,60 @@
+\chapter{Table}
+
+\section{Basic Table}
+\begin{center}
+	\begin{tabular}{c c c}
+		cell1 & cell2 & cell3 \\ 
+		cell4 & cell5 & cell6 \\  
+		cell7 & cell8 & cell9    
+	\end{tabular}
+\end{center}
+
+\section{Table with Boarder}
+
+\begin{tabular}{|c|c|c|} 
+	\hline
+	cell1 & cell2 & cell3 \\ 
+	cell4 & cell5 & cell6 \\ 
+	cell7 & cell8 & cell9 \\ 
+	\hline
+\end{tabular}
+
+\section{Table with Caption}
+
+Table \ref{table:data} shows how to add a table caption and reference a table.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{||c c c c||} 
+		\hline
+		Col1 & Col2 & Col2 & Col3 \\ [0.5ex] 
+		\hline\hline
+		1 & 6 & 87837 & 787 \\ 
+		2 & 7 & 78 & 5415 \\
+		3 & 545 & 778 & 7507 \\
+		4 & 545 & 18744 & 7560 \\
+		5 & 88 & 788 & 6344 \\ [1ex] 
+		\hline
+	\end{tabular}
+	\caption{Table to test captions and labels.}
+	\label{table:data}
+\end{table}
+
+
+\section{My Default Table Style}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c c c c|}
+		\hline
+		Item & Status & Description & Note \\
+		\hline
+		
+		1 & OK & this is the first test & nan \\
+		2 & Failed & The second test failed & Need to retry \\
+		3 & Pending & Pending for testing & Pending \\
+		
+		\hline
+	\end{tabular}
+	\caption{test caption}
+	\label{table:test-label}
+\end{table}
