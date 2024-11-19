@@ -15,6 +15,7 @@
 \usepackage{algpseudocode}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage{enumerate}
 \pagestyle{plain}
 
 \theoremstyle{definition}
@@ -35,14 +36,14 @@
 
 \section{Quadratic Optimization Problem}
 
-In this chapter, we will present a brief introduction to Quadratic Programming.
+In this chapter, we provide a brief introduction to Quadratic Programming(QP).
 
-Quadratic programming is a set of methods that solves a class of optimization problem with quadratic form. More specifically, we want to minimize the following objective function
+Quadratic programming focuses on solving optimization problems where the objective function includes a quadratic term and the constraints are linear. More formally, a quadratic programming problem seeks to minimize an objective function of the following form:
 \begin{displaymath}
 	c^{\mathsf{T}}x + \frac{1}{2}x^{\mathsf{T}} \Sigma x
 \end{displaymath}
 
-subject to the following constraints:
+The optimization problem is subject to the following constraints:
 \begin{displaymath}
 	a_i^{\mathsf{T}}x \leqslant b_i, \quad i=1,2,...,m
 \end{displaymath}
@@ -76,7 +77,7 @@ The set of points that satisfy all the constraints forms feasible region of the 
 One of the key concepts in quadratic programming is quasi-stationary point, which is defined as follows:
 
 \begin{definition}[Quasi-Stationary Point]\label{def_quasi_stationary_point}
-	The point $x_0$ is quasi-stationary if $x_0\in \mathcal{R}$, and $x_0$ is optimal for the problem
+	The point $x_0$ is quasi-stationary if $x_0\in \mathcal{R}$, and $x_0$ is optimal for the problem below
 	\begin{displaymath}
 		\textrm{min}\{c^{\mathsf{T}}x + \frac{1}{2}x^{\mathsf{T}}\Sigma{}x \;|\; a_i^{\mathsf{T}}x=b_i, \;\forall i \in I(x_0)  \}
 	\end{displaymath}
@@ -97,14 +98,55 @@ The point $x_0$ is a nondegenerate quasi-stationary point if it's a quasi-statio
 
 
 
+\section{Optimality Conditions}
+
+In this section, we present two sets of optimality conditions without providing proofs. 
+
+Consider the following problem:
+
+\[
+	\min \left\{c^{\mathsf{T}}x + \frac{1}{2}x^{\mathsf{T}}\Sigma{}x \ |\  Ax = b \right\}
+\]
+
+The optimality conditions are
+\begin{enumerate}[(i)]
+	\item $Ax_0 = b$
+	\item there exists a vector $u$ with $-\nabla f(x_0) = A^{\mathsf{T}}u$
+\end{enumerate}
+
+\begin{remark}
+	The negative sign in the second condition does not matter. Without loss of generality, we can write $\nabla f(x_0) = A^{\mathsf{T}}v$
+\end{remark}
+
+The above optimality conditions are a special case of the Karush-Kuhn-Tucker conditions.
+
+Let's now consider a slightly different problem. In additional to equality constraints, we introduce inequality constraints as well:
+
+\[
+\min \left\{c^{\mathsf{T}}x + \frac{1}{2}x^{\mathsf{T}}\Sigma{}x \ |\  Ax \leqslant b \right\}
+\]
+
+The optimality conditions for the new problem are:
+\begin{enumerate}[(i)]
+	\item $Ax_0 \leqslant b$
+	\item there exists a vector $u$ with $-\nabla f(x_0) = A^{\mathsf{T}}u$
+	\item $\forall i, \ u_i \geqslant 0$
+	\item $u^{\mathsf{T}} (Ax_0 - b) = 0 $
+\end{enumerate}
+
+
 \section{Building Blocks}
 
 We can now present the main constructs in Quadratic Programming. The algorithm moves from one quasi-stationary point to another and always decreases the objective function. As there are a finite number of quasi-stationary, the process will eventually terminate.
 
-Moving from one quasi-station point to another requires finding the correct direction. This process is guided by the lemma below:
+Moving from one quasi-stationary point to another requires finding the correct direction. This process is guided by the lemma below:
 
 \begin{lemma}\label{lemma_search_direction}
-	Let $x_0$ satisfy $Ax_0 = b$. Then $x_0 - s_0$ is optimal for $min\{ c^{\mathsf{T}}x + \frac{1}{2} x^{\mathsf{T}}\Sigma{}x \;|\; Ax = b \}$ if and only if $s_0$ satisfies the linear equation:
+	Let $x_0$ satisfy $Ax_0 = b$. Then $x_0 - s_0$ is optimal for
+	\[
+	min\{ c^{\mathsf{T}}x + \frac{1}{2} x^{\mathsf{T}}\Sigma{}x \ |\ Ax = b \}
+	\] 
+	if and only if $s_0$ satisfies the linear equation:
 	\begin{displaymath}
 		\begin{bmatrix}
 			\Sigma{} & A^{\mathsf{T}} \\
@@ -130,11 +172,11 @@ Moving from one quasi-station point to another requires finding the correct dire
 \end{lemma}
 
 \begin{remark}
-	The condition here is different from the optimality conditions. In the optimality conditions, the coefficients are required to be positive, i.e. $v_i \ge 0$. In the lemma above, there is no such requirement.
+	The condition here is different from the optimality conditions for the general form of quadratic problems where the constraints can have inequalities. In the optimality conditions, the coefficients are required to be positive, i.e. $v_i \ge 0$. In the lemma above, there is no such requirement.
 \end{remark}
 
-\begin{remark}
-	it's intentional that the coefficient vector is cal $v_0$ instead of $u_0$. The difference is that for an optimization problem with equality constraints, the optimality condition only requires $\nabla f(x_0)  = A^{\mathsf{T}} v$ and the sign of the components does not matter. On the contrast, the optimality condition of an optimization problem with inequality constraints takes the following forms:
+\begin{remark}\label{remark_flipped_sign}
+	it's intentional that the coefficient vector is called $v_0$ instead of $u_0$. The difference is that for an optimization problem with equality constraints, the optimality condition only requires $\nabla f(x_0)  = A^{\mathsf{T}} v$ and the sign of the components does not matter. On the contrast, the optimality condition of an optimization problem with inequality constraints takes the following forms:
 	\begin{align*}
 		-\nabla f(x_0) = A^{\mathsf{T}} u \quad \mathrm{and} \quad \forall i, u_i \geqslant 0
 	\end{align*}
@@ -159,6 +201,10 @@ Let $b_0$ denote the corresponding subvector of vector $b$. By definition, we ha
 	A_0 x_0 = b_0
 \end{displaymath}
 
+\begin{remark}
+	Since the constraints are equality constraints, they are always active for points in the feasible region.
+\end{remark}
+
 In this document, we assume matrix $A_0$ has full row rank so that we can use lemma \ref{lemma_full_row_rank}. 
 
 Let 
@@ -176,18 +222,18 @@ Since $H_0$ is invertible under the assumption, we can solve the linear equation
 	\sigma: \; \mapsto f(x_0 - \sigma s_0)
 \end{displaymath}
 
-It can be shown that the above function is a decreasing function for $0 \leqslant \sigma \leqslant 1$ and attains its minimum at $\sigma = 1$. The problem is that $x_0 - s_0$ may not be feasible anymore.
+It can be shown that the above function is a decreasing function for $0 \leqslant \sigma \leqslant 1$ and attains its minimum at $\sigma = 1$. The problem is that $x_0 - s_0$ might no longer lie within the feasible region.
 
 
 \begin{center}
 	\includegraphics[width=0.6\textwidth]{search_direction.png}
 \end{center}
 
-Let's determine the conditions for the point $x_0 - \sigma s_0$ to satisfy all constraints. In other words, for any constraint $i$, we have
+Let's determine the conditions for the point $x_0 - \sigma s_0$ to satisfy all constraints. In other words, for any constraint $i$, we want to have
 
 \begin{align*}
-	a_i^{\mathsf{T}}(x_0 - \sigma s_0) \leqslant b_i \\
-	\Rightarrow -\sigma a_i^{\mathsf{T}} s_0 \leqslant b_i - a_i^{\mathsf{T}}x_0
+	& a_i^{\mathsf{T}}(x_0 - \sigma s_0) \leqslant b_i \\
+	\Rightarrow \quad & -\sigma a_i^{\mathsf{T}} s_0 \leqslant b_i - a_i^{\mathsf{T}}x_0
 \end{align*}
 
 If $a_i^{\mathsf{T}}s_0 \ge 0$, then constraint $i$ is satisfied automatically because the left side is negative and the right side is positive ($x_0$ is in the feasible region so it satisfies the constraint). 
@@ -207,14 +253,14 @@ It follows that the maximum step size is
 Since there is a finite number of constraints, let $l$ denote the index that attains minimum and $\sigma_0$ be the maximum distance. In other words,
 
 \begin{displaymath}
-	\hat{\sigma} = \frac{b_l - a_l^{\mathsf{T}}x_0}{-a_l^{\mathsf{T}}s_0}
+	\sigma_0 \triangleq \hat{\sigma} = \frac{b_l - a_l^{\mathsf{T}}x_0}{-a_l^{\mathsf{T}}s_0}
 \end{displaymath}
 
 \begin{center}
 	\includegraphics[width=0.6\textwidth]{maximum_step_size.png}
 \end{center}
 
-There are two cases to handle. To simplify our discussion and notation, define $x_1 = x_0 - \sigma_0 s_0$.
+We need to address two cases. For clarity and to simplify our notation, let's define $x_1 = x_0 - \sigma_0 s_0$.
 
 \textbf{Case 1}: $\sigma_0 < 1$
 
@@ -228,18 +274,18 @@ Note that $a_l$ cannot be linearly dependent on the columns of $A_0^{\mathsf{T}}
 	\Rightarrow \quad & (A_0 s_0)^{\mathsf{T}} \omega  = s_0^{\mathsf{T}} a_l
 \end{align*}
 
-By construction(\ref{lemma_search_direction}), $A_0 s_0 = 0$. It follows that
+By construction(see lemma \ref{lemma_search_direction}), $A_0 s_0 = 0$. It follows that
 \[ 
 	s_0^{\mathsf{T}} a_l = 0
 \] 
 
 which contradicts the definition of index $l$ because by definition, $a_l^{\mathsf{T}}s_0 < 0$.
 
-This process cannot continue forever because the dimension of the matrix $A_0$ is finite. At some point, we need to deal with the second case.
+This process cannot continue indefinitely as the matrix $A_0$ has finite dimensions. Eventually, we must address the second case.
 
 \textbf{Case 2}: $\sigma_0 = 1$.
 
-In this case, $x_1 = x_0 - s_0$ and the gradient is given as
+In this case, $x_1 = x_0 - s_0$ and the gradient of the objective function $f$ at $x_1$ is given as
 \begin{align*}
 	& g_1 = c + \Sigma x_1 \\
 	& \quad = c + \Sigma (x_0 - s_0) \\
@@ -268,6 +314,17 @@ Expanding the first row, we obtain
 	& \Sigma s_0 + A_0^{\mathsf{T}} v_0 = g_0 \\
 	\Rightarrow \quad & g_1 = A_0^{\mathsf{T}} v_0
 \end{align*}
+
+
+\begin{remark}
+	At this point, the point $x_1$ is in the feasible region and the gradient is a linear combination of the constraint vectors. If, by chance, all components of $v_0$ are positive, then $x_1$ is the optimal solution. Otherwise, the search must continue.
+\end{remark}
+
+Suppose some of the components of $v_0$ are negative. Recall the discussion in remark \ref{remark_flipped_sign}, we have 
+\[
+	v_0 = -u_0
+\]
+where $u_0$ is the vector $u$ in the general optimality condition formulation.
 
 Now construct a new matrix $A_1$ by deleting the constraint where the coefficient is negative. Suppose this constraint has index $k$. For simplicity, let's further assume the following relationship holds:
 \[
@@ -314,9 +371,11 @@ Because $k$ was an active constraint, we have $a_k^{\mathsf{T}} x_ 1 = b_k$. Bot
 b_k - a_k^{\mathsf{T}} (x_1 - \sigma s_1) > 0
 \]
 
+This means, after removing the constraint $k$ and continue the process, we will move to a different quasi-stationary point, where the constraint $k$ remains inactive. Meanwhile, since the optimization problem in the next iteration has less constrains, the value of the objective function will decrease.
+
 \section{Summary}
 \begin{center}
-	\includegraphics[width=0.9\textwidth]{summary_of_process.png}
+	\includegraphics[width=\textwidth]{summary_of_process.png}
 \end{center}
 
 
