@@ -1,0 +1,79 @@
+\documentclass[letterpaper, oneside]{book}
+%\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{fancyhdr}
+\usepackage[export]{adjustbox}
+\usepackage[skip=10pt]{parskip}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\pagestyle{plain}
+
+% No spce between items in itemize
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}
+
+% Configure listings backage for code
+\lstset{
+	%numbers=left,
+	%numberstyle=\tiny,
+	breaklines=true,
+	%numbersep=5pt,
+    	frame = single,
+    	aboveskip=2\baselineskip,
+    	belowskip=2\baselineskip,
+	xleftmargin=.15in,
+	xrightmargin=.05in}
+	
+\lstset{aboveskip=2\baselineskip,belowskip=2\baselineskip}
+
+\lstdefinestyle{python}{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={self}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+}
+
+\lstdefinestyle{rust}{
+	language=Rust,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={self}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	framextopmargin=1pt
+}
+
+\graphicspath{{./images/}}
+
+\begin{document}
+
+\tableofcontents
+
+
+\end{document}
+
+
+

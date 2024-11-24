@@ -16,6 +16,42 @@
 \pagestyle{plain}
 
 
+\lstset{aboveskip=2\baselineskip,belowskip=2\baselineskip}
+
+\lstdefinestyle{python}{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={self}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+}
+
+\lstdefinestyle{rust}{
+	language=Rust,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={self}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	framextopmargin=1pt
+}
+
+
 
 % Configuration
 
@@ -45,7 +81,6 @@
 
 
 
-
 %\dfrac{num}{den}
 
 \title{My first LaTeX document}
@@ -54,53 +89,55 @@
 
 
 \begin{document}
-	\maketitle{}
-	\tableofcontents
+\maketitle{}
+\tableofcontents
 
 
 
-	\chapter{Basic}
+\chapter{Basic}
 
-	\section{Paragraph}
+\section{Paragraph}
 
-	This line is supposed to be a very long text. Its purpose is to show how the paragraph works in Latex. As you can see this is a multi-line text.
+This line is supposed to be a very long text. Its purpose is to show how the paragraph works in Latex. As you can see this is a multi-line text.
 
-	To start a new paragraph, we can do a blank line in the latex  file. Each new paragraph has a default indent.
+To start a new paragraph, we can do a blank line in the latex  file. Each new paragraph has a default indent.
 
-	This line is to show the effect of the indent mentioned in the previous paragraph.
+This line is to show the effect of the indent mentioned in the previous paragraph.
 
-	Some of the \textbf{greatest}
-	discoveries in \underline{science}
-	were made by \textbf{\textit{accident}}. hello
+Some of the \textbf{greatest}
+discoveries in \underline{science}
+were made by \textbf{\textit{accident}}. hello
 
-	Some of the greatest \emph{discoveries} in science
-	were made by accident.
+Some of the greatest \emph{discoveries} in science
+were made by accident.
 
-	\textit{Some of the greatest \emph{discoveries}
-		in science were made by accident.}
+\textit{Some of the greatest \emph{discoveries}
+	in science were made by accident.}
 
-	\textbf{Some of the greatest \emph{discoveries}
-		in science were made by accident.}
+\textbf{Some of the greatest \emph{discoveries}
+	in science were made by accident.}
 
-	\section{Listing}
+\section{Listing}
 
-	Example: Unordered List \\
-	\begin{itemize}
-		\item The individual entries are indicated with a black dot, a so-called bullet.
-		\item The text in the entries may be of any length.
-	\end{itemize}
+Example: Unordered List \\
+\begin{itemize}
+	\item The individual entries are indicated with a black dot, a so-called bullet.
+	\item The text in the entries may be of any length.
+\end{itemize}
 
-	Example: Ordered List: \\
+Example: Ordered List: \\
 
-	\begin{enumerate}
-		\item This is the first entry in our list.
-		\item The list numbers increase with each entry we add.
-	\end{enumerate}
+\begin{enumerate}
+	\item This is the first entry in our list.
+	\item The list numbers increase with each entry we add.
+\end{enumerate}
 
 
-	\section{Links}
+\section{Links}
 
-	Example: hyper link:  \href{https://news.ycombinator.com/news}{This is the link to a blog}
+Example: hyper link:  \href{https://news.ycombinator.com/news}{This is the link to a blog}
+
+
 
 \section{Insert Code Snippets}
 
@@ -115,6 +152,19 @@ enum AnyThing {
 let obj1 = AnyThing::Color("This is a red color");
 let obj2 = AnyThing::Reddit(10);
 
+\end{lstlisting}
+
+
+
+\subsection{Insert Python Code}
+
+\begin{lstlisting}[style=python]
+# This is a sample Python code
+def greet(name):
+"""Greets the person by name."""
+print(f"Hello, {name}!")
+
+greet("Alice")
 \end{lstlisting}
 
 \subsection{Insert Algorithm}
