@@ -16,6 +16,10 @@
 \end{itemize}
 
 
+\section{Principles}
+
+One of the most fundamental Kubernetes principles. Instead of telling Kubernetes exactly what actions it should perform, you're only declaratively changing the desired state of the system and letting Kubernetes examine the current actual state and reconcile it with the desired state. This is true across all of Kubernetes.
+
 \section{Features}
 \begin{itemize}
 	\item service discovery
@@ -31,10 +35,38 @@
 	\item master node
 	\item Kubernetes Control Planes
 	\item worker node
+	\item ReplicationController: Generally, ReplicationControllers are used to replicate pods (that is, create multiple copies of a pod) and keep them running.
 \end{itemize}
 
 
+\section{Tools}
+\begin{itemize}
+	\item Minikube
+	\item kops
+\end{itemize}
 
 \section{Kubernetes Cluster Architecture}
 
+\begin{itemize}
+	\item Each node runs Docker, the Kubelet and the kube-proxy. You'll interact with the cluster through the \textit{kubectl} command line client, which issues REST requests to the Kubernetes API server running on the master node.
+\end{itemize}
+
+
+\begin{question}
+Where do we run the kubctl command?
+\end{question}
+
+
 \includegraphics[max width=\textwidth]{introduction/k8s_cluster_architecture.png}
+
+\section{Examples of Commonly Used Commands}
+
+\begin{lstlisting}[style=bash]
+kubectl run <ControllerName> --iamge=<ImageName> --port=8080 --generator=run/v1
+kubectl expose rc <ControllerName> --type=LoadBalancer --name <ServiceName>
+kubectl api-resources
+kubectl get pods -o wide
+kubectl describe pod <PodName>
+\end{lstlisting}
+
+test

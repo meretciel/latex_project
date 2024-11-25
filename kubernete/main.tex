@@ -13,7 +13,18 @@
 \usepackage{hyperref}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
 \pagestyle{plain}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[chapter]
 
 % No spaceing between items in itemize
 \usepackage{enumitem}
@@ -25,13 +36,12 @@
 	%numberstyle=\tiny,
 	breaklines=true,
 	%numbersep=5pt,
-    	frame = single,
-    	aboveskip=2\baselineskip,
-    	belowskip=2\baselineskip,
+    frame = single,
+    aboveskip=2\baselineskip,
+    belowskip=2\baselineskip,
 	xleftmargin=.15in,
 	xrightmargin=.05in}
-	
-\lstset{aboveskip=2\baselineskip,belowskip=2\baselineskip}
+
 
 \lstdefinestyle{python}{
 	language=Python,
@@ -66,7 +76,29 @@
 	framextopmargin=1pt
 }
 
+\lstdefinestyle{bash}{
+	language=Bash,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	framextopmargin=1pt
+}
+
+
 \graphicspath{{./images/}}
+
+\newenvironment{question}
+{\textbf{Question.} }{}
+
 
 \begin{document}
 
@@ -74,6 +106,8 @@
 
 \include{ch_introduction.tex}
 \include{ch_docker_and_k8s.tex}
+\include{ch_pod.tex}
+\include{ch_service.tex}
 
 \end{document}
 
