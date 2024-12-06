@@ -1,0 +1,142 @@
+\documentclass[letterpaper, oneside]{book}
+%\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{fancyhdr}
+\usepackage[export]{adjustbox}
+\usepackage[skip=10pt]{parskip}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\pagestyle{plain}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[chapter]
+
+% No spce between items in itemize
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}
+
+% Configure listings backage for code
+\lstset{
+	%numbers=left,
+	%numberstyle=\tiny,
+	breaklines=true,
+	%numbersep=5pt,
+    	frame = single,
+    	aboveskip=2\baselineskip,
+    	belowskip=2\baselineskip,
+	xleftmargin=.15in,
+	xrightmargin=.05in}
+	
+\lstset{aboveskip=2\baselineskip,belowskip=2\baselineskip}
+
+\lstdefinestyle{python}{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={self}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+}
+
+\lstdefinestyle{rust}{
+	language=Rust,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morekeywords={self}, % Add keywords here
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	framextopmargin=1pt
+}
+
+\graphicspath{{./images/}}
+
+\begin{document}
+
+\tableofcontents
+
+\chapter{Introduction}
+
+\section{Concepts}
+
+\begin{itemize}
+	\item language modeling
+		\begin{itemize}
+			\item pretraining
+			\item foundation model or base model
+		\end{itemize}	
+		
+	\item fine-tuning
+	\item two-step approach
+	\item pretrained model and fine-tuned model
+\end{itemize}
+
+
+\section{Frameworks}
+
+\begin{itemize}
+	\item llama.cpp
+	\item LangChain
+	\item Hugging Face Transformers
+\end{itemize}
+
+\section{Reminder}
+
+\begin{itemize}
+	\item When you use an LLM, to models are loaded
+		\begin{itemize}
+			\item the generative model itself
+			\item its underlying tokenizer
+		\end{itemize}
+\end{itemize}
+
+
+\section{Keywords}
+data; model; objective function; supervised learning; data point; data instance; sample; 
+features; covariates; inputs; label; target; dimensionality; fixed-length; varying-length; loss function; squared error; surrogate objective; taining dataset; teest dataset; overfitting; gradient descent; regression; classification; multi-class classification; cross-entropy; hierarchical classification; multi-label classification; censored feedback; sequence learning; sequence-to-sequence learning;
+
+unsupervised learning; clustering; subspace estimation; principal component analysis; probabilistic graphical models; offline learning; agent; action; distribution shift; actuator; policy; credit assignment; Markov decision process; contextual bandit problem; exploit; explore; multi-armed bandit problem; 
+
+layers; backpropagation; dropout; attention mechanism; learnable pointer structure; transformer; scaling behavior; diffusion models; end-to-end training; feature engineering; weight; bias; intercept; affine transformation; linear transformation; translation; fitness; real value; predicted value; loss functions; squared error; gradient descent; stochastic gradient descent; minibatch; learning rate; hyperparameters; maximum likelihood estimator; feature dimensionality; test dataset; validation dataset; cross-validation; k-fold cross validation;
+
+validation error; weight decay; IID assumption; training error; generalization error; survival modeling; one-hot encoding; fully connected layer; softmax; normalization; cross-entropy loss; entropy; surprisal; expected surprisal; adaptive overfitting; multiple hypothesis testing; covariate shift; label shift; concept shift; non-stationary distribution; emperical risk; emperical risk minimization; source distribution; target distribution; confusion matrix; batch learning; online learning; reinforcement learning; runaway feedback loops; multilayer perceptron; hidden representations; activation function; sigmoid function; vanishing gradient; forward propagation; backword propagation; computational graphs; chain ruel; out-of-memory error; vanishing gradient; exploding gradient; xavier initialization; inductive biases; early stopping; patience criterion; group of layers; blocks; neural network module;
+
+spatial invariance; translation invariance; locality; convolution; convolution layer; convolution kernel; filter; cross-correlation; channels; feature maps; kernel window; convolution window; receptive field; padding; stride; polling layer; input channel; output channel; 
+
+Long short term memory; memory cell; Bidirectional Recurrent Neural Network; encoder-decoder architecture; beam search; internal state; input gate; output gate; forget gate; input node; Gated Recurrent Unit (GRU); reset gate; update gate; candidate hidden state; candidate; machine translation; sequence-to-sequence; neural machine translation; tokenizatin; trucating; padding; target; source; batch normalization; scale parameter; shift parameter; training mode; prediction mode; layer normalization; momentum; residual networks; residual block; residual mapping; residual connection; aligned; unaligned; sequence modeling; time step; autoregressive models; latent autoregressive models; stationary; tokens; Markov condition; k-step-ahead prediction; predicted token; context variable; embedding layer; greedy search; exhustive search; beam search; most likely token; most likely sequence; beam size; unigram; bigram; trigram; Laplace smoothing; perplexity; sequence partitioning; one-hot encoding; Lipschitzc continuous; gradient clipping; backpropagation through time; computational graph
+
+
+\end{document}
+
+
+
